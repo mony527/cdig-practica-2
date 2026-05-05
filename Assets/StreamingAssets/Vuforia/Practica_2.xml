@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="sarten_scaled" size="6.000000 6.033771" />
+    <ImageTarget name="plato_scaled" size="6.000000 5.977736" />
+    <ImageTarget name="leche_scaled" size="6.000000 6.055659" />
+    <ImageTarget name="huevo_scaled" size="6.000000 6.022305" />
+    <ImageTarget name="canela_scaled" size="6.000000 6.033708" />
+    <ImageTarget name="bandeja_scaled" size="6.000000 6.000000" />
+    <ImageTarget name="pan_scaled" size="6.000000 6.022599" />
+    <ImageTarget name="azucar_scaled" size="6.000000 6.022264" />
+    <ImageTarget name="aceite_scaled" size="6.000000 6.022181" />
+  </Tracking>
+</QCARConfig>

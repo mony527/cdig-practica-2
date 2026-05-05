@@ -104,3 +104,6 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+#Vuforia package PREGUNTAR 
+/Packages/com.ptc.vuforia.engine-11.4.4.tgz 
