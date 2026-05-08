@@ -4,194 +4,75 @@ using UnityEngine;
 using TMPro;
 
 
+using System.Collections.Generic;
+using UnityEngine;
+
 public class Controlador : MonoBehaviour
 {
-    public GameObject panSeco3D;
-    public GameObject leche3D;
-    public GameObject bandeja3D;
+    [System.Serializable]
+    public class IngredienteData
+    {
+        public string id;              
+        public GameObject prefab;      
+        [HideInInspector] public GameObject instancia; 
+        [HideInInspector] public bool presente;        
+    }
 
-    public GameObject panMojado3D;
-    public GameObject bolHuevo3D;
-    public GameObject panRebozado3D;
+    public List<IngredienteData> ingredientes = new List<IngredienteData>();
 
-    public GameObject aceite3D;
-    public GameObject sarten3D;
-    public GameObject sartenLista3D;
-
-    public GameObject panFrito3D;
-
-    public GameObject azucar3D;
-    public GameObject canela3D;
-    public GameObject mezclaDulce3D;
-
-    public GameObject panDulce3D;
-
-    public GameObject plato3D;
-
-    private bool panSeco, leche, bandeja, panMojado, bolHuevo, panRebozado, aceite, sarten, sartenLista,panFrito, azucar, canela, mezclaDulce, panDulce, plato, torrija ;
-
+    private Dictionary<string, IngredienteData> mapa;
 
     void Start()
     {
-        panSeco = leche = bandeja = panMojado = bolHuevo = panRebozado = aceite = sarten = sartenLista = panFrito = azucar = canela = mezclaDulce = panDulce = plato = torrija = false;
-        
-        mezclaDulce3D.SetActive(false);
+        mapa = new Dictionary<string, IngredienteData>();
+
+        foreach (var ing in ingredientes)
+            mapa.Add(ing.id, ing);
     }
 
-    void Update()
+    public void ITPresente(string id, Transform targetTransform)
     {
- 
-    }
+        if (!mapa.ContainsKey(id)) return;
 
-    public void Actualizar()
-    {
-        if (panSeco && leche && bandeja)
+        var ing = mapa[id];
+        ing.presente = true;
+
+        if (ing.instancia == null)
         {
-            panMojado = true;
-            panSeco = leche = false;
-
-            panSeco3D.SetActive(false);
-            leche3D.SetActive(false);
-            panMojado3D.SetActive(true);
-
-            panMojado3D.transform.SetParent(bandeja3D.transform);
-            panMojado3D.transform.localPosition = new Vector3(0, 1.0f, 0);
+            ing.instancia = Instantiate(ing.prefab);
+            ing.instancia.name = ing.id + "_3D";
         }
 
-        if (panMojado && !bandeja)
-        {
-            panMojado=false;
-            panMojado3D.SetActive(false);
+        ing.instancia.transform.SetParent(targetTransform);
+        ing.instancia.transform.localPosition = Vector3.zero;
+        ing.instancia.transform.localRotation = Quaternion.identity;
 
-            panSeco3D.SetActive(true);
-            leche3D.SetActive(true);
-        }
+        ing.instancia.SetActive(true);
 
-        if(aceite && sarten) 
-        { 
-            aceite = false;
-            sarten = false;
-            sartenLista = true;
-
-            aceite3D.SetActive(false);
-            sarten3D.SetActive(false);
-            sartenLista3D.SetActive(true);
-        }
-
-        if(sartenLista && !sarten)
-        {
-            sartenLista = false;
-
-            aceite3D.SetActive(true);
-            sarten3D.SetActive(true);
-            sartenLista3D.SetActive(false);
-        }
-
-        if (azucar && canela) 
-        { 
-            azucar = false;
-            canela = false;
-            mezclaDulce = true;
-
-            azucar3D.SetActive(false);
-            canela3D.SetActive(false);
-            mezclaDulce3D.SetActive(true);
-            mezclaDulce3D.transform.localPosition = azucar3D.transform.localPosition;
-
-        }
-
-        if(mezclaDulce && !azucar)
-        {
-            mezclaDulce = false;
-
-            azucar3D.SetActive(true);
-            canela3D.SetActive(true);
-            mezclaDulce3D.SetActive(false);
-
-        }
-
-    }
-
-    public void ITPresente(string id)
-    {
-        if (id == "leche")
-        {
-            leche = true;
-        }
-        if (id == "panSeco")
-        {
-            panSeco = true;
-        }
-        if (id == "bandeja")
-        {
-            bandeja = true;
-        }
-        if(id == "bolHuevo") 
-        {
-            bolHuevo = true;
-        }
-        if(id == "aceite")
-        {
-            aceite = true;
-        }
-        if (id == "sarten")
-        {
-            sarten = true;
-        }
-        if (id == "azucar")
-        {
-            azucar = true;
-        }
-        if (id == "canela")
-        {
-            canela = true;
-        }
-        if (id == "plato")
-        {
-            plato = true;
-        }
-        Actualizar();
+        ActualizarEstados();
     }
 
     public void ITAusente(string id)
     {
-        if (id == "leche")
+        if (!mapa.ContainsKey(id)) return;
+
+        var ing = mapa[id];
+        ing.presente = false;
+
+        if (ing.instancia != null)
+            ing.instancia.SetActive(false);
+
+        ActualizarEstados();
+    }
+
+    private void ActualizarEstados()
+    {
+        if (mapa["panSeco"].presente && mapa["leche"].presente && mapa["bandeja"].presente)
         {
-            leche = false;
+            mapa["panSeco"].instancia.SetActive(false);
+            mapa["leche"].instancia.SetActive(false);
+
+            ITPresente("panMojado", mapa["bandeja"].instancia.transform);
         }
-        if (id == "panSeco")
-        {
-            panSeco = false;
-        }
-        if (id == "bandeja")
-        {
-            bandeja = false;
-        }
-        if (id == "bolHuevo")
-        {
-            bolHuevo = false;
-        }
-        if (id == "aceite")
-        {
-            aceite = false;
-        }
-        if (id == "sarten")
-        {
-            sarten = false;
-        }
-        if (id == "azucar")
-        {
-            azucar = false;
-        }
-        if (id == "canela")
-        {
-            canela = false;
-        }
-        if (id == "plato")
-        {
-            plato = false;
-        }
-        Actualizar();
-     
     }
 }
