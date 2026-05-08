@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Net.NetworkInformation;
 using TMPro;
-
-
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Controlador : MonoBehaviour
@@ -30,26 +27,23 @@ public class Controlador : MonoBehaviour
             mapa.Add(ing.id, ing);
     }
 
-    public void ITPresente(string id, Transform targetTransform)
+    public void ITPresente(string id)
     {
-        if (!mapa.ContainsKey(id)) return;
-
-        var ing = mapa[id];
-        ing.presente = true;
-
-        if (ing.instancia == null)
+        if (mapa.ContainsKey(id))
         {
-            ing.instancia = Instantiate(ing.prefab);
-            ing.instancia.name = ing.id + "_3D";
+            var ing = mapa[id];
+            ing.presente = true;
+
+            if (ing.instancia == null)
+            {
+                ing.instancia = Instantiate(ing.prefab);
+                ing.instancia.name = ing.id + "_3D";
+            }
+            
+            ing.instancia.SetActive(true);
+
+            ActualizarEstados();
         }
-
-        ing.instancia.transform.SetParent(targetTransform);
-        ing.instancia.transform.localPosition = Vector3.zero;
-        ing.instancia.transform.localRotation = Quaternion.identity;
-
-        ing.instancia.SetActive(true);
-
-        ActualizarEstados();
     }
 
     public void ITAusente(string id)
@@ -67,12 +61,29 @@ public class Controlador : MonoBehaviour
 
     private void ActualizarEstados()
     {
-        if (mapa["panSeco"].presente && mapa["leche"].presente && mapa["bandeja"].presente)
+        // 1. Verificamos si los ingredientes base están presentes
+        bool panMojado = mapa["panSeco"].presente &&
+                         mapa["leche"].presente &&
+                         mapa["bandeja"].presente;
+
+        // 2. CRUCIAL: Solo entramos si la base está lista PERO el panMojado NO está presente aún
+        if (panMojado && !mapa["panMojado"].presente)
         {
+            // Desactivamos los visuales de los ingredientes viejos
             mapa["panSeco"].instancia.SetActive(false);
             mapa["leche"].instancia.SetActive(false);
 
-            ITPresente("panMojado", mapa["bandeja"].instancia.transform);
+            mapa["panMojado"].instancia.transform.SetParent(mapa["bandeja"].instancia.transform);
+            mapa["panMojado"].instancia.transform.localPosition = new Vector3(0, 1.0f, 0);
+           
+        }
+        if (panMojado && !mapa["bandeja"].presente)
+        {
+            mapa["panMojado"].presente = false;
+            mapa["panMojado"].instancia.SetActive(false);
+
+            mapa["panSeco"].instancia.SetActive(true);
+            mapa["leche"].instancia.SetActive(true);
         }
     }
 }

@@ -202,8 +202,8 @@ GameObject:
   - component: {fileID: 347352784}
   - component: {fileID: 347352783}
   - component: {fileID: 347352782}
-  - component: {fileID: 347352786}
   - component: {fileID: 347352785}
+  - component: {fileID: 347352786}
   m_Layer: 0
   m_Name: ITAzucar
   m_TagString: Untagged
@@ -364,8 +364,8 @@ GameObject:
   - component: {fileID: 497166302}
   - component: {fileID: 497166301}
   - component: {fileID: 497166300}
-  - component: {fileID: 497166304}
   - component: {fileID: 497166303}
+  - component: {fileID: 497166304}
   m_Layer: 0
   m_Name: ITCanela
   m_TagString: Untagged
@@ -526,8 +526,8 @@ GameObject:
   - component: {fileID: 593440644}
   - component: {fileID: 593440643}
   - component: {fileID: 593440642}
-  - component: {fileID: 593440646}
   - component: {fileID: 593440645}
+  - component: {fileID: 593440646}
   m_Layer: 0
   m_Name: ITPlato
   m_TagString: Untagged
@@ -764,8 +764,8 @@ GameObject:
   - component: {fileID: 695674637}
   - component: {fileID: 695674636}
   - component: {fileID: 695674635}
-  - component: {fileID: 695674639}
   - component: {fileID: 695674638}
+  - component: {fileID: 695674639}
   m_Layer: 0
   m_Name: ITSarten
   m_TagString: Untagged
@@ -1122,8 +1122,8 @@ GameObject:
   - component: {fileID: 1256837314}
   - component: {fileID: 1256837313}
   - component: {fileID: 1256837312}
-  - component: {fileID: 1256837316}
   - component: {fileID: 1256837315}
+  - component: {fileID: 1256837316}
   m_Layer: 0
   m_Name: ITPanSeco
   m_TagString: Untagged
@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256837311}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
   m_Name: 
@@ -1389,8 +1389,8 @@ GameObject:
   - component: {fileID: 1485764208}
   - component: {fileID: 1485764207}
   - component: {fileID: 1485764206}
-  - component: {fileID: 1485764210}
   - component: {fileID: 1485764209}
+  - component: {fileID: 1485764210}
   m_Layer: 0
   m_Name: ITLeche
   m_TagString: Untagged
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485764205}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
   m_Name: 
@@ -1439,9 +1439,9 @@ MonoBehaviour:
   OnTargetFound:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1269773878}
+      - m_Target: {fileID: 1269773879}
         m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: ITPresente
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1551,8 +1551,8 @@ GameObject:
   - component: {fileID: 1521934754}
   - component: {fileID: 1521934753}
   - component: {fileID: 1521934752}
-  - component: {fileID: 1521934756}
   - component: {fileID: 1521934755}
+  - component: {fileID: 1521934756}
   m_Layer: 0
   m_Name: ITBandeja
   m_TagString: Untagged
@@ -1567,7 +1567,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521934751}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
   m_Name: 
@@ -1713,8 +1713,8 @@ GameObject:
   - component: {fileID: 1938699909}
   - component: {fileID: 1938699908}
   - component: {fileID: 1938699907}
-  - component: {fileID: 1938699911}
   - component: {fileID: 1938699910}
+  - component: {fileID: 1938699911}
   m_Layer: 0
   m_Name: ITAceite
   m_TagString: Untagged
@@ -2129,8 +2129,8 @@ GameObject:
   - component: {fileID: 2132696026}
   - component: {fileID: 2132696025}
   - component: {fileID: 2132696024}
-  - component: {fileID: 2132696028}
   - component: {fileID: 2132696027}
+  - component: {fileID: 2132696028}
   m_Layer: 0
   m_Name: ITBolHuevo
   m_TagString: Untagged

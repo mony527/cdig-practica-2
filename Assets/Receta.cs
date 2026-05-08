@@ -18,7 +18,7 @@ public class TargetDetector : MonoBehaviour
     {
         if (status.Status == Status.TRACKED || status.Status == Status.EXTENDED_TRACKED)
         {
-            controlador.ITPresente(id, transform);
+            controlador.ITPresente(id);
         }
         else
         {

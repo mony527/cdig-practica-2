@@ -107,3 +107,8 @@ InitTestScene*.unity*
 
 #Vuforia package PREGUNTAR 
 /Packages/com.ptc.vuforia.engine-11.4.4.tgz 
+# Ignorar el archivo pesado de Vuforia
+Assets/Editor/Migration/com.ptc.vuforia.engine-11.4.4.tgz
+
+# Ignorar su archivo meta asociado
+Assets/Editor/Migration/com.ptc.vuforia.engine-11.4.4.tgz.meta
