@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -201,7 +201,6 @@ GameObject:
   m_Component:
   - component: {fileID: 347352784}
   - component: {fileID: 347352783}
-  - component: {fileID: 347352782}
   - component: {fileID: 347352785}
   - component: {fileID: 347352786}
   m_Layer: 0
@@ -211,74 +210,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &347352782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347352781}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITPresente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: azucar
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITAusente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: azucar
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &347352783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +261,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 347352781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c70ef7f14e574f4da36ffa3d7b190b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1c67057fed00748a82820ae9678219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: azucar
@@ -363,7 +294,6 @@ GameObject:
   m_Component:
   - component: {fileID: 497166302}
   - component: {fileID: 497166301}
-  - component: {fileID: 497166300}
   - component: {fileID: 497166303}
   - component: {fileID: 497166304}
   m_Layer: 0
@@ -373,74 +303,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &497166300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497166299}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITPresente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: canela
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITAusente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: canela
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &497166301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,7 +354,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 497166299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c70ef7f14e574f4da36ffa3d7b190b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1c67057fed00748a82820ae9678219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: canela
@@ -525,7 +387,6 @@ GameObject:
   m_Component:
   - component: {fileID: 593440644}
   - component: {fileID: 593440643}
-  - component: {fileID: 593440642}
   - component: {fileID: 593440645}
   - component: {fileID: 593440646}
   m_Layer: 0
@@ -535,74 +396,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &593440642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593440641}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITPresente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: plato
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITAusente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: plato
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &593440643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,7 +447,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 593440641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c70ef7f14e574f4da36ffa3d7b190b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1c67057fed00748a82820ae9678219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: plato
@@ -711,9 +504,9 @@ RectTransform:
   m_Father: {fileID: 912218959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15, y: -141}
-  m_SizeDelta: {x: -487.4925, y: -386.4903}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -5.8499146, y: 42.45398}
+  m_SizeDelta: {x: 132.50403, y: 84.89789}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &612240181
 MonoBehaviour:
@@ -763,7 +556,6 @@ GameObject:
   m_Component:
   - component: {fileID: 695674637}
   - component: {fileID: 695674636}
-  - component: {fileID: 695674635}
   - component: {fileID: 695674638}
   - component: {fileID: 695674639}
   m_Layer: 0
@@ -773,74 +565,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &695674635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695674634}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITPresente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: sarten
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITAusente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: sarten
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &695674636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,7 +616,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 695674634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c70ef7f14e574f4da36ffa3d7b190b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1c67057fed00748a82820ae9678219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: sarten
@@ -1121,7 +845,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1256837314}
   - component: {fileID: 1256837313}
-  - component: {fileID: 1256837312}
   - component: {fileID: 1256837315}
   - component: {fileID: 1256837316}
   m_Layer: 0
@@ -1131,74 +854,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1256837312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256837311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITPresente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: panSeco
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITAusente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: panSeco
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1256837313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1250,7 +905,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1256837311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c70ef7f14e574f4da36ffa3d7b190b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1c67057fed00748a82820ae9678219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: panSeco
@@ -1302,65 +957,95 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef23b1f5427c674fae25f2583bc1c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientes:
+  targets:
   - id: aceite
     prefab: {fileID: 5618517104204350331, guid: 55e2a1e5fa2a44445b495ee185b75b29, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: bandeja
     prefab: {fileID: 2955438226690434921, guid: 9522704f2894a114f89611ec5057aeba, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: -90, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: bolHuevo
     prefab: {fileID: 4560989632352855438, guid: e3fc9b9af4d05934e9ea144082deb8f0, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: canela
     prefab: {fileID: 3581564866202093548, guid: 7c16c027cbc15d0489daa324c1b72519, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: leche
     prefab: {fileID: 8943033147530097396, guid: 1aa517ecd23b16046b5a14bbcc1e8349, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: mezclaDulce
     prefab: {fileID: 4770304671526774076, guid: 5b6d6f81458c4114b9f0ada8f820d58e, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: panDulce
     prefab: {fileID: 6807201330373950027, guid: 0673ae0e2e1e76841949ddc926977245, type: 3}
+    positionOffset: {x: 0, y: 0.5, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: panFrito
     prefab: {fileID: 8573267731096978206, guid: 6d4010840fc3c9945b626e34db015d22, type: 3}
+    positionOffset: {x: 0, y: 0, z: 4}
+    rotationOffset: {x: -90, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: panMojado
     prefab: {fileID: 1600730590943176910, guid: 72cd50033d549d240b3045839542aed5, type: 3}
+    positionOffset: {x: 0, y: 0.5, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: panRebozado
     prefab: {fileID: 4786428147951788529, guid: 9d5e5d856841a1e409d36b19912d4837, type: 3}
+    positionOffset: {x: 0, y: 0.5, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: panSeco
     prefab: {fileID: 8203770676481001560, guid: c21318dccc31d5248a853f86dfad01a3, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: azucar
     prefab: {fileID: 6332740408268130999, guid: 8b26824055c448245810dee180ca3c85, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: plato
     prefab: {fileID: 7725832271017653270, guid: c7ccdf1af9778354b9492d953e1d835e, type: 3}
-    instancia: {fileID: 0}
-    presente: 0
-  - id: sartenLista
-    prefab: {fileID: 6574588018307606871, guid: 88b6ef7e06d78e045b1fd6b4997dead3, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: 0, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
   - id: sarten
     prefab: {fileID: 2314741349466116889, guid: f26a80a410df5cb46823b8940beb9bd8, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: -90, y: 0, z: 0}
+    instancia: {fileID: 0}
+    presente: 0
+  - id: sartenLista
+    prefab: {fileID: 6574588018307606871, guid: 88b6ef7e06d78e045b1fd6b4997dead3, type: 3}
+    positionOffset: {x: 0, y: 0, z: 0}
+    rotationOffset: {x: -90, y: 0, z: 0}
     instancia: {fileID: 0}
     presente: 0
 --- !u!4 &1269773880
@@ -1388,7 +1073,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1485764208}
   - component: {fileID: 1485764207}
-  - component: {fileID: 1485764206}
   - component: {fileID: 1485764209}
   - component: {fileID: 1485764210}
   m_Layer: 0
@@ -1398,74 +1082,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1485764206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485764205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITPresente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: leche
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITAusente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: leche
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1485764207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,7 +1133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1485764205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c70ef7f14e574f4da36ffa3d7b190b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1c67057fed00748a82820ae9678219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: leche
@@ -1550,7 +1166,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1521934754}
   - component: {fileID: 1521934753}
-  - component: {fileID: 1521934752}
   - component: {fileID: 1521934755}
   - component: {fileID: 1521934756}
   m_Layer: 0
@@ -1560,74 +1175,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1521934752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521934751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITPresente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: bandeja
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITAusente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: bandeja
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1521934753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1679,7 +1226,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1521934751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c70ef7f14e574f4da36ffa3d7b190b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1c67057fed00748a82820ae9678219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: bandeja
@@ -1702,6 +1249,63 @@ MonoBehaviour:
   mCastedBehaviour: {fileID: 1521934753}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
+--- !u!1 &1849953778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1849953780}
+  - component: {fileID: 1849953779}
+  m_Layer: 0
+  m_Name: ControladorUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1849953779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849953778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 296595492b48e8745abfd66847aa83db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controladorAR: {fileID: 1269773879}
+  textoEstado: {fileID: 1993930285}
+  ingredientesIDs:
+  - panSeco
+  - leche
+  - canela
+  - aceite
+  utensiliosIDs:
+  - bandeja
+  - bolHuevo
+  - sarten
+  - plato
+  - azucar
+--- !u!4 &1849953780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849953778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 404.1657, y: 156.6333, z: -43.537964}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1938699906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,7 +1316,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1938699909}
   - component: {fileID: 1938699908}
-  - component: {fileID: 1938699907}
   - component: {fileID: 1938699910}
   - component: {fileID: 1938699911}
   m_Layer: 0
@@ -1722,74 +1325,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1938699907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938699906}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITPresente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: aceite
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITAusente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: aceite
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1938699908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1841,7 +1376,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1938699906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c70ef7f14e574f4da36ffa3d7b190b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1c67057fed00748a82820ae9678219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: aceite
@@ -2128,7 +1663,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2132696026}
   - component: {fileID: 2132696025}
-  - component: {fileID: 2132696024}
   - component: {fileID: 2132696027}
   - component: {fileID: 2132696028}
   m_Layer: 0
@@ -2138,74 +1672,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2132696024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2132696023}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITPresente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: bolHuevo
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1269773879}
-        m_TargetAssemblyTypeName: Controlador, Assembly-CSharp
-        m_MethodName: ITAusente
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: bolHuevo
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2132696025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2257,7 +1723,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2132696023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c70ef7f14e574f4da36ffa3d7b190b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a1c67057fed00748a82820ae9678219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: bolHuevo
@@ -2298,3 +1764,4 @@ SceneRoots:
   - {fileID: 497166302}
   - {fileID: 593440644}
   - {fileID: 1269773880}
+  - {fileID: 1849953780}

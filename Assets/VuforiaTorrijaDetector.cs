@@ -1,22 +1,27 @@
 using UnityEngine;
 using Vuforia;
 
-public class TargetDetector : MonoBehaviour
+public class VuforiaTorrijaDetector : MonoBehaviour
 {
     public string id; 
 
-    private Controlador controlador;
+    private ControladorAR controlador;
 
     void Start()
     {
-        controlador = FindObjectOfType<Controlador>();
+        controlador = FindObjectOfType<ControladorAR>();
         var observer = GetComponent<ObserverBehaviour>();
-        observer.OnTargetStatusChanged += OnStatusChanged;
+        if (observer != null)
+        {
+            observer.OnTargetStatusChanged += OnStatusChanged;
+        }
     }
 
     private void OnStatusChanged(ObserverBehaviour behaviour, TargetStatus status)
     {
-        if (status.Status == Status.TRACKED || status.Status == Status.EXTENDED_TRACKED)
+        if (controlador == null) return;
+
+        if (status.Status == Status.TRACKED)
         {
             controlador.ITPresente(id);
         }
