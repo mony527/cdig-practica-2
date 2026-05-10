@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine;
+using static ControladorAR;
 
 public class ControladorAR : MonoBehaviour
 {
@@ -262,7 +263,7 @@ public class ControladorAR : MonoBehaviour
         }
     }
 
-    private VuforiaTorrijaDetector FindTargetDetector(string id)
+    public VuforiaTorrijaDetector FindTargetDetector(string id)
     {
         VuforiaTorrijaDetector[] detectors = FindObjectsOfType<VuforiaTorrijaDetector>();
         foreach (var d in detectors)
@@ -270,6 +271,25 @@ public class ControladorAR : MonoBehaviour
             if (d.id == id) return d;
         }
         return null;
+    }
+
+    public RecipeStep GetCurrentStep()
+    {
+        return currentStep;
+    }
+
+    public Transform GetDetectorTransform(string id)
+    {
+        VuforiaTorrijaDetector td = FindTargetDetector(id);
+        return td != null ? td.transform : null;
+    }
+
+    public void SetModelVisibility(string id, bool visible)
+    {
+        if (mapa.ContainsKey(id) && mapa[id].instancia != null)
+        {
+            mapa[id].instancia.SetActive(visible);
+        }
     }
 }
 

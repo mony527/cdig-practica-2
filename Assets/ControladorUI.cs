@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -11,8 +11,8 @@ public class ControladorUI : MonoBehaviour
     public TextMeshProUGUI textoEstado;
 
     [Header("Configuración de Elementos")]
-    public List<string> ingredientesIDs = new List<string> { "panSeco", "leche", "canela", "aceite" };
-    public List<string> utensiliosIDs = new List<string> { "bandeja", "bolHuevo", "sarten", "plato", "azucar" };
+    public List<string> ingredientesIDs = new List<string> { "panSeco", "leche", "canela", "aceite", "azucar", "bolHuevo" };
+    public List<string> utensiliosIDs = new List<string> { "bandeja", "sarten", "plato" };
 
     private bool mostrarInfo = false;
 
@@ -75,5 +75,10 @@ public class ControladorUI : MonoBehaviour
             mostrarInfo = !mostrarInfo;
             controladorAR.ToggleLabels(mostrarInfo);
         }
+    }
+
+    public bool IsRecetaCompleta()
+    {
+        return textoEstado.text.Equals("Receta completa");
     }
 }
