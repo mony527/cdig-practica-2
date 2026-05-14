@@ -19,6 +19,7 @@ public class ControladorAR : MonoBehaviour
     }
 
     public List<TargetData> targets = new List<TargetData>();
+    public GameObject txtIngrediente;
 
     public enum RecipeStep
     {
@@ -57,19 +58,40 @@ public class ControladorAR : MonoBehaviour
 
     private void AddLabelToModel(GameObject model, string name)
     {
-        GameObject labelObj = new GameObject("InfoLabel");
-        labelObj.transform.SetParent(model.transform);
+        if (model == null) return;
 
-        var textMesh = labelObj.AddComponent<TextMeshPro>();
-        textMesh.text = name;
-        textMesh.fontSize = 5;
-        textMesh.alignment = TextAlignmentOptions.Center;
-        textMesh.color = Color.blue;
-        
-        var billboard = labelObj.AddComponent<LabelBillboard>();
-        billboard.targetModel = model;
-        
-        labelObj.SetActive(false);
+        GameObject labelObj = null;
+        TextMeshPro textMesh = null;
+
+        if (txtIngrediente != null)
+        {
+            labelObj = Instantiate(txtIngrediente, model.transform);
+            labelObj.name = "InfoLabel";
+            textMesh = labelObj.GetComponentInChildren<TextMeshPro>();
+        }
+        else
+        {
+            // Fallback manual creation if prefab is missing
+            labelObj = new GameObject("InfoLabel");
+            labelObj.transform.SetParent(model.transform);
+            textMesh = labelObj.AddComponent<TextMeshPro>();
+            textMesh.fontSize = 12;
+            textMesh.alignment = TextAlignmentOptions.Center;
+            textMesh.color = Color.white;
+        }
+
+        if (textMesh != null)
+        {
+            textMesh.text = name;
+        }
+
+        if (labelObj != null)
+        {
+            var billboard = labelObj.GetComponent<LabelBillboard>();
+            if (billboard == null) billboard = labelObj.AddComponent<LabelBillboard>();
+            billboard.targetModel = model;
+            labelObj.SetActive(false);
+        }
     }
 
     public void ToggleLabels(bool visible)
@@ -110,16 +132,16 @@ public class ControladorAR : MonoBehaviour
 
     private void CheckReversion(string id)
     {
-        if (id == "bandeja" && currentStep == RecipeStep.PanMojado) currentStep = RecipeStep.PanSeco;
-        if (id == "bolHuevo" && currentStep == RecipeStep.PanRebozado) currentStep = RecipeStep.PanMojado;
-        if (id == "sarten" && (currentStep == RecipeStep.PanFrito || sartenLista)) 
+        if ((id == "bandeja" || id == "leche" || id == "panSeco") && currentStep >= RecipeStep.PanMojado) currentStep = RecipeStep.PanSeco;
+        if (id == "bolHuevo" && currentStep >= RecipeStep.PanRebozado) currentStep = RecipeStep.PanMojado;
+        if ((id == "sarten" || id == "aceite") && (currentStep >= RecipeStep.PanFrito || sartenLista)) 
         {
-            if (currentStep == RecipeStep.PanFrito) currentStep = RecipeStep.PanRebozado;
+            if (currentStep >= RecipeStep.PanFrito) currentStep = RecipeStep.PanRebozado;
             sartenLista = false;
         }
-        if (id == "azucar" && (currentStep == RecipeStep.PanDulce || mezclaDulce))
+        if ((id == "azucar" || id == "canela") && (currentStep >= RecipeStep.PanDulce || mezclaDulce))
         {
-            if (currentStep == RecipeStep.PanDulce) currentStep = RecipeStep.PanFrito;
+            if (currentStep >= RecipeStep.PanDulce) currentStep = RecipeStep.PanFrito;
             mezclaDulce = false;
         }
         if (id == "plato" && currentStep == RecipeStep.Torrija) currentStep = RecipeStep.PanDulce;
@@ -298,10 +320,26 @@ public class LabelBillboard : MonoBehaviour
     public GameObject targetModel;
     public float verticalOffset = 0.2f;
     public float cameraBias = 0.1f;
+    private Vector3 initialLocalScale;
+
+    void Start()
+    {
+        initialLocalScale = transform.localScale;
+    }
 
     void LateUpdate()
     {
         if (targetModel == null || !targetModel.activeInHierarchy) return;
+
+        if (transform.parent != null)
+        {
+            Vector3 parentScale = transform.parent.lossyScale;
+            transform.localScale = new Vector3(
+                initialLocalScale.x / (parentScale.x != 0 ? parentScale.x : 1f),
+                initialLocalScale.y / (parentScale.y != 0 ? parentScale.y : 1f),
+                initialLocalScale.z / (parentScale.z != 0 ? parentScale.z : 1f)
+            );
+        }
 
         Renderer[] renderers = targetModel.GetComponentsInChildren<Renderer>();
         if (renderers.Length == 0) return;
@@ -326,9 +364,9 @@ public class LabelBillboard : MonoBehaviour
         if (first) return;
 
         Vector3 camPos = Camera.main.transform.position;
-        Vector3 closestPoint = bounds.ClosestPoint(camPos);
-
-        Vector3 targetPos = new Vector3(closestPoint.x, bounds.max.y + verticalOffset, closestPoint.z);
+        
+        // Use the center of the bounds for a stable position
+        Vector3 targetPos = new Vector3(bounds.center.x, bounds.max.y + verticalOffset, bounds.center.z);
 
         Vector3 dirToCam = (camPos - targetPos).normalized;
         targetPos += dirToCam * cameraBias;
