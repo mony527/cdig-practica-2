@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -34,47 +34,53 @@ public class ControladorUI : MonoBehaviour
 
     private void ActualizarTextoEstado()
     {
-        if (controladorAR == null || textoEstado == null) return;
-
-        bool faltanIngredientes = false;
-        foreach (var id in ingredientesIDs)
+        if (controladorAR != null && textoEstado != null)
         {
-            if (!controladorAR.IsTargetPresent(id))
-            {
-                faltanIngredientes = true;
-                break;
+
+            bool faltanIngredientes = false;
+            int i = 0;
+            while (i < ingredientesIDs.Count && !faltanIngredientes) 
+            { 
+                var id = ingredientesIDs[i];
+                if (!controladorAR.IsTargetPresent(id))
+                {
+                    faltanIngredientes = true;
+                }
+                i++;
             }
-        }
 
-        bool faltanUtensilios = false;
-        foreach (var id in utensiliosIDs)
-        {
-            if (!controladorAR.IsTargetPresent(id))
+            bool faltanUtensilios = false;
+            i = 0;
+            while (i < utensiliosIDs.Count && !faltanUtensilios)
             {
-                faltanUtensilios = true;
-                break;
+                var id = utensiliosIDs[i];
+                if (!controladorAR.IsTargetPresent(id))
+                {
+                    faltanUtensilios = true;
+                }
+                i++;
             }
-        }
 
-        if (!faltanIngredientes && !faltanUtensilios)
-        {
-            textoEstado.text = "Receta completa";
-            textoEstado.color = Color.green;
-        }
-        else if (!faltanIngredientes && faltanUtensilios)
-        {
-            textoEstado.text = "Faltan utensilios";
-            textoEstado.color = Color.yellow;
-        }
-        else if (faltanIngredientes && !faltanUtensilios)
-        {
-            textoEstado.text = "Faltan ingredientes";
-            textoEstado.color = Color.yellow;
-        }
-        else
-        {
-            textoEstado.text = "Faltan elementos";
-            textoEstado.color = Color.red;
+            if (!faltanIngredientes && !faltanUtensilios)
+            {
+                textoEstado.text = "Receta completa";
+                textoEstado.color = Color.green;
+            }
+            else if (!faltanIngredientes && faltanUtensilios)
+            {
+                textoEstado.text = "Faltan utensilios";
+                textoEstado.color = Color.yellow;
+            }
+            else if (faltanIngredientes && !faltanUtensilios)
+            {
+                textoEstado.text = "Faltan ingredientes";
+                textoEstado.color = Color.yellow;
+            }
+            else
+            {
+                textoEstado.text = "Faltan elementos";
+                textoEstado.color = Color.red;
+            }
         }
     }
 
@@ -83,8 +89,8 @@ public class ControladorUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             mostrarInfo = !mostrarInfo;
-            controladorAR.ToggleLabels(mostrarInfo);
-            controladorAR.ActualizarLabels();
+            controladorAR.ActivarEtiquetas(mostrarInfo);
+            controladorAR.ActualizarEtiquetas();
         }
     }
 

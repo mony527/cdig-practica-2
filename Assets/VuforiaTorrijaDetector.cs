@@ -19,15 +19,16 @@ public class VuforiaTorrijaDetector : MonoBehaviour
 
     private void OnStatusChanged(ObserverBehaviour behaviour, TargetStatus status)
     {
-        if (controlador == null) return;
-
-        if (status.Status == Status.TRACKED)
+        if (controlador != null)
         {
-            controlador.ITPresente(id);
-        }
-        else
-        {
-            controlador.ITAusente(id);
+            if (status.Status == Status.TRACKED)
+            {
+                controlador.ITPresente(id);
+            }
+            else
+            {
+                controlador.ITAusente(id);
+            }
         }
     }
 }

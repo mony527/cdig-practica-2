@@ -8,7 +8,7 @@ using static ControladorAR;
 public class ControladorAR : MonoBehaviour
 {
     [System.Serializable]
-    public class TargetData
+    public class IngredienteData
     {
         public string id;              
         public string label;
@@ -19,12 +19,12 @@ public class ControladorAR : MonoBehaviour
         [HideInInspector] public bool presente;        
     }
 
-    public List<TargetData> targets = new List<TargetData>();
+    public List<IngredienteData> ingredientes = new List<IngredienteData>();
 
     public GameObject txtIngrediente;
     public GameObject txtPanes;
 
-    public enum RecipeStep
+    public enum PasosReceta
     {
         PanSeco,
         PanMojado,
@@ -34,95 +34,98 @@ public class ControladorAR : MonoBehaviour
         Torrija
     }
 
-    private RecipeStep currentStep = RecipeStep.PanSeco;
+    private PasosReceta pasoActual = PasosReceta.PanSeco;
     private bool sartenLista = false;
     private bool mezclaDulce = false;
 
-    private Dictionary<string, TargetData> mapa;
+    private Dictionary<string, IngredienteData> mapaIngredientes;
 
     void Start()
     {
-        mapa = new Dictionary<string, TargetData>();
+        mapaIngredientes = new Dictionary<string, IngredienteData>();
 
-        foreach (var t in targets)
+        foreach (var t in ingredientes)
         {
-            if (mapa.ContainsKey(t.id)) continue;
-            mapa.Add(t.id, t);
-            if (t.prefab != null)
+            if (!mapaIngredientes.ContainsKey(t.id))
             {
-                t.instancia = Instantiate(t.prefab);
-                t.instancia.name = t.id + "_Model";
-                t.instancia.SetActive(false);
-                
-                AddLabelToModel(t.instancia, t.label);
-            }
-        }
-    }
-
-    private void AddLabelToModel(GameObject model, string name)
-    {
-        if (model == null) return;
-
-        GameObject labelObj = null;
-        GameObject labelObjOpt = null;
-        TextMeshPro textMesh = null;
-        TextMeshPro textMeshOpt = null;
-
-        if (txtIngrediente != null)
-        {
-            if (name.StartsWith("Pan"))
-            {
-                if (name.Equals("Pan dulce"))
+                mapaIngredientes.Add(t.id, t);
+                if (t.prefab != null)
                 {
-                    labelObjOpt = Instantiate(txtPanes, model.transform);
-                    labelObjOpt.name = "InfoLabelOpt";
-                    textMeshOpt = labelObjOpt.GetComponentInChildren<TextMeshPro>();
+                    t.instancia = Instantiate(t.prefab);
+                    t.instancia.name = t.id + "_Model";
+                    t.instancia.SetActive(false);
+
+                    AniadirEtiqueta(t.instancia, t.label);
                 }
-                labelObj = Instantiate(txtPanes, model.transform);
             }
-            else
-            {
-                labelObj = Instantiate(txtIngrediente, model.transform);
-            }
-
-            labelObj.name = "InfoLabel";
-            textMesh = labelObj.GetComponentInChildren<TextMeshPro>();
-        }
-
-        if (textMesh != null)
-        {
-            textMesh.text = name;
-        }
-
-        if (name.Equals("Pan dulce") && textMeshOpt != null)
-        {
-            textMeshOpt.text = "Torrija";
-        }
-
-        if (labelObj != null)
-        {
-            var billboard = labelObj.GetComponent<LabelBillboard>();
-            if (billboard == null) billboard = labelObj.AddComponent<LabelBillboard>();
-            billboard.targetModel = model;
-            labelObj.SetActive(false);
-        }
-
-        if (name.Equals("Pan dulce") && labelObjOpt != null)
-        {
-            var billboard = labelObjOpt.GetComponent<LabelBillboard>();
-            if (billboard == null) billboard = labelObjOpt.AddComponent<LabelBillboard>();
-            billboard.targetModel = model;
-            labelObjOpt.SetActive(false);
         }
     }
 
-    public void ToggleLabels(bool visible)
+    private void AniadirEtiqueta(GameObject model, string name)
     {
-        foreach (var t in targets)
+        if (model != null)
+        {
+            GameObject etiquetaObj = null;
+            GameObject etiquetaObjOpt = null;
+            TextMeshPro textMesh = null;
+            TextMeshPro textMeshOpt = null;
+
+            if (txtIngrediente != null)
+            {
+                if (name.StartsWith("Pan"))
+                {
+                    if (name.Equals("Pan dulce"))
+                    {
+                        etiquetaObjOpt = Instantiate(txtPanes, model.transform);
+                        etiquetaObjOpt.name = "InfoLabelOpt";
+                        textMeshOpt = etiquetaObjOpt.GetComponentInChildren<TextMeshPro>();
+                    }
+                    etiquetaObj = Instantiate(txtPanes, model.transform);
+                }
+                else
+                {
+                    etiquetaObj = Instantiate(txtIngrediente, model.transform);
+                }
+
+                etiquetaObj.name = "InfoLabel";
+                textMesh = etiquetaObj.GetComponentInChildren<TextMeshPro>();
+            }
+
+            if (textMesh != null)
+            {
+                textMesh.text = name;
+            }
+
+            if (name.Equals("Pan dulce") && textMeshOpt != null)
+            {
+                textMeshOpt.text = "Torrija";
+            }
+
+            if (etiquetaObj != null)
+            {
+                var panelEtiqueta = etiquetaObj.GetComponent<PanelEtiqueta>();
+                if (panelEtiqueta == null) panelEtiqueta = etiquetaObj.AddComponent<PanelEtiqueta>();
+                panelEtiqueta.ingredienteModel = model;
+                etiquetaObj.SetActive(false);
+            }
+
+            if (name.Equals("Pan dulce") && etiquetaObjOpt != null)
+            {
+                var panelEtiqueta = etiquetaObjOpt.GetComponent<PanelEtiqueta>();
+                if (panelEtiqueta == null) panelEtiqueta = etiquetaObjOpt.AddComponent<PanelEtiqueta>();
+                panelEtiqueta.ingredienteModel = model;
+                etiquetaObjOpt.SetActive(false);
+            }
+        }
+    }
+
+    public void ActivarEtiquetas(bool visible)
+    {
+        foreach (var t in ingredientes)
         {
             if (t.instancia != null)
             {
-                if (t.id.Equals("Pan dulce") && currentStep == RecipeStep.Torrija)
+                if (t.id.Equals("Pan dulce") && pasoActual == PasosReceta.Torrija)
                 {
                     Transform labelOpt = t.instancia.transform.Find("InfoLabelOpt");
                     if (labelOpt != null) labelOpt.gameObject.SetActive(visible);
@@ -135,125 +138,121 @@ public class ControladorAR : MonoBehaviour
         }
     }
 
+
     public bool IsTargetPresent(string id)
     {
-        return IsPresent(id);
+        return mapaIngredientes.ContainsKey(id) && mapaIngredientes[id].presente;
     }
 
     public void ITPresente(string id)
     {
-        if (mapa.ContainsKey(id))
+        if (mapaIngredientes.ContainsKey(id))
         {
-            mapa[id].presente = true;
+            mapaIngredientes[id].presente = true;
             ActualizarEstados();
         }
     }
 
     public void ITAusente(string id)
     {
-        if (mapa.ContainsKey(id))
+        if (mapaIngredientes.ContainsKey(id))
         {
-            mapa[id].presente = false;
-            CheckReversion(id);
+            mapaIngredientes[id].presente = false;
+            ComprobarPasosPrevios(id);
             ActualizarEstados();
         }
     }
 
-    private void CheckReversion(string id)
+    private void ComprobarPasosPrevios(string id)
     {
-        if ((id == "bandeja" || id == "leche" || id == "panSeco") && currentStep >= RecipeStep.PanMojado) currentStep = RecipeStep.PanSeco;
-        if (id == "bolHuevo" && currentStep >= RecipeStep.PanRebozado) currentStep = RecipeStep.PanMojado;
-        if ((id == "sarten" || id == "aceite") && (currentStep >= RecipeStep.PanFrito || sartenLista)) 
+        if ((id == "bandeja" || id == "leche" || id == "panSeco") && pasoActual >= PasosReceta.PanMojado) pasoActual = PasosReceta.PanSeco;
+        if (id == "bolHuevo" && pasoActual >= PasosReceta.PanRebozado) pasoActual = PasosReceta.PanMojado;
+        if ((id == "sarten" || id == "aceite") && (pasoActual >= PasosReceta.PanFrito || sartenLista)) 
         {
-            if (currentStep >= RecipeStep.PanFrito) currentStep = RecipeStep.PanRebozado;
+            if (pasoActual >= PasosReceta.PanFrito) pasoActual = PasosReceta.PanRebozado;
             sartenLista = false;
         }
-        if ((id == "azucar" || id == "canela") && (currentStep >= RecipeStep.PanDulce || mezclaDulce))
+        if ((id == "azucar" || id == "canela") && (pasoActual >= PasosReceta.PanDulce || mezclaDulce))
         {
-            if (currentStep >= RecipeStep.PanDulce) currentStep = RecipeStep.PanFrito;
+            if (pasoActual >= PasosReceta.PanDulce) pasoActual = PasosReceta.PanFrito;
             mezclaDulce = false;
         }
-        if (id == "plato" && currentStep == RecipeStep.Torrija) currentStep = RecipeStep.PanDulce;
+        if (id == "plato" && pasoActual == PasosReceta.Torrija) pasoActual = PasosReceta.PanDulce;
     }
 
     private void ActualizarEstados()
     {
-        if (!sartenLista && IsPresent("aceite") && IsPresent("sarten"))
+        if (!sartenLista && IsTargetPresent("aceite") && IsTargetPresent("sarten"))
             sartenLista = true;
 
-        if (!mezclaDulce && IsPresent("azucar") && IsPresent("canela"))
+        if (!mezclaDulce && IsTargetPresent("azucar") && IsTargetPresent("canela"))
             mezclaDulce = true;
 
-        if (currentStep == RecipeStep.PanSeco)
+        if (pasoActual == PasosReceta.PanSeco)
         {
-            if (IsPresent("panSeco") && IsPresent("leche") && IsPresent("bandeja"))
-                currentStep = RecipeStep.PanMojado;
+            if (IsTargetPresent("panSeco") && IsTargetPresent("leche") && IsTargetPresent("bandeja"))
+                pasoActual = PasosReceta.PanMojado;
         }
 
-        if (currentStep == RecipeStep.PanMojado)
+        if (pasoActual == PasosReceta.PanMojado)
         {
-            if (IsPresent("bolHuevo"))
-                currentStep = RecipeStep.PanRebozado;
+            if (IsTargetPresent("bolHuevo"))
+                pasoActual = PasosReceta.PanRebozado;
         }
 
-        if (currentStep == RecipeStep.PanRebozado)
+        if (pasoActual == PasosReceta.PanRebozado)
         {
-            if (sartenLista && IsPresent("sarten"))
-                currentStep = RecipeStep.PanFrito;
+            if (sartenLista && IsTargetPresent("sarten"))
+                pasoActual = PasosReceta.PanFrito;
         }
 
-        if (currentStep == RecipeStep.PanFrito)
+        if (pasoActual == PasosReceta.PanFrito)
         {
-            if (mezclaDulce && IsPresent("azucar"))
-                currentStep = RecipeStep.PanDulce;
+            if (mezclaDulce && IsTargetPresent("azucar"))
+                pasoActual = PasosReceta.PanDulce;
         }
 
-        if (currentStep == RecipeStep.PanDulce)
+        if (pasoActual == PasosReceta.PanDulce)
         {
-            if (IsPresent("plato"))
-                currentStep = RecipeStep.Torrija;
-            ActualizarLabels();
+            if (IsTargetPresent("plato"))
+                pasoActual = PasosReceta.Torrija;
+            ActualizarEtiquetas();
         }
 
         ActualizarVisuales();
     }
 
-    public void ActualizarLabels()
+    public void ActualizarEtiquetas()
     {
-        TargetData panDulce = mapa["panDulce"];
+        IngredienteData panDulce = mapaIngredientes["panDulce"];
         Transform labelOpt = panDulce.instancia.transform.Find("InfoLabelOpt");
         Transform label = panDulce.instancia.transform.Find("InfoLabel");
 
-        if (currentStep == RecipeStep.Torrija)
+        if (pasoActual == PasosReceta.Torrija)
         {
             if (label != null) label.gameObject.SetActive(false);
             if (labelOpt != null) labelOpt.gameObject.SetActive(ControladorUI.instancia.IsInfoActive());
         }
 
-        if (currentStep == RecipeStep.PanDulce)
+        if (pasoActual == PasosReceta.PanDulce)
         {
             if (labelOpt != null) labelOpt.gameObject.SetActive(false);
             if (label != null) label.gameObject.SetActive(ControladorUI.instancia.IsInfoActive());
         }
     }
 
-    private bool IsPresent(string id)
-    {
-        return mapa.ContainsKey(id) && mapa[id].presente;
-    }
-
     private void ActualizarVisuales()
     {
-        foreach (var t in targets)
+        foreach (var t in ingredientes)
         {
             if (t.instancia != null) t.instancia.SetActive(false);
         }
 
-        foreach (var t in targets)
+        foreach (var t in ingredientes)
         {
             if (t.presente && t.instancia != null)
             {
-                if (IsBaseIngredientNotConsumed(t.id))
+                if (IngredienteBaseNoConsumido(t.id))
                 {
                     ShowAt(t.id, t.id);
                 }
@@ -270,66 +269,67 @@ public class ControladorAR : MonoBehaviour
             ShowAt("mezclaDulce", "azucar");
         }
 
-        switch (currentStep)
+        switch (pasoActual)
         {
-            case RecipeStep.PanMojado:
+            case PasosReceta.PanMojado:
                 ShowAt("panMojado", "bandeja"); 
                 break;
-            case RecipeStep.PanRebozado:
+            case PasosReceta.PanRebozado:
                 ShowAt("panRebozado", "bolHuevo");
                 break;
-            case RecipeStep.PanFrito:
+            case PasosReceta.PanFrito:
                 ShowAt("panFrito", "sartenLista");
                 break;
-            case RecipeStep.PanDulce:
+            case PasosReceta.PanDulce:
                 ShowAt("panDulce", "mezclaDulce");
                 break;
-            case RecipeStep.Torrija:
+            case PasosReceta.Torrija:
                 ShowAt("panDulce", "plato");
                 break;
         }
 
     }
 
-    private bool IsBaseIngredientNotConsumed(string id)
+    private bool IngredienteBaseNoConsumido(string id)
     {
-        // Consumable elements: basic ingredients and utensils when replaced by mixtures
         bool isConsumable = (id == "panSeco" || id == "canela" || id == "leche" || id == "aceite" || id == "sarten" || id == "azucar");
 
         if (!isConsumable) return true;
 
-        if (currentStep >= RecipeStep.PanMojado && (id == "panSeco" || id == "leche")) return false;
+        if (pasoActual >= PasosReceta.PanMojado && (id == "panSeco" || id == "leche")) return false;
 
-        if (sartenLista && (id == "aceite" || id == "sarten")) return false; // sarten is replaced by sartenLista
-        if (mezclaDulce && (id == "canela" || id == "azucar")) return false; // azucar is replaced by mezclaDulce
+        if (sartenLista && (id == "aceite" || id == "sarten")) return false;
+        if (mezclaDulce && (id == "canela" || id == "azucar")) return false;
 
         return true;
     }
 
-    private void ShowAt(string productId, string targetId)
+    private void ShowAt(string origenId, string destinoId)
     {
-        if (mapa.ContainsKey(productId) && mapa.ContainsKey(targetId))
+        if (mapaIngredientes.ContainsKey(origenId) && mapaIngredientes.ContainsKey(destinoId))
         {
-            GameObject product = mapa[productId].instancia;
-            if (product == null) return;
-
-            VuforiaTorrijaDetector td = FindTargetDetector(targetId);
-            if (td != null)
+            GameObject ingredienteOrigen = mapaIngredientes[origenId].instancia;
+            if (ingredienteOrigen != null)
             {
-                product.SetActive(true);
-                product.transform.SetParent(td.transform);
-                product.transform.localPosition = mapa[productId].positionOffset;
-                product.transform.localRotation = Quaternion.Euler(mapa[productId].rotationOffset);
-                return;
-            }
-
-            GameObject targetModel = mapa[targetId].instancia;
-            if (targetModel != null && targetModel.activeInHierarchy)
-            {
-                product.SetActive(true);
-                product.transform.SetParent(targetModel.transform);
-                product.transform.localPosition = mapa[productId].positionOffset;
-                product.transform.localRotation = Quaternion.Euler(mapa[productId].rotationOffset);
+                VuforiaTorrijaDetector td = FindTargetDetector(destinoId);
+                if (td != null)
+                {
+                    ingredienteOrigen.SetActive(true);
+                    ingredienteOrigen.transform.SetParent(td.transform);
+                    ingredienteOrigen.transform.localPosition = mapaIngredientes[origenId].positionOffset;
+                    ingredienteOrigen.transform.localRotation = Quaternion.Euler(mapaIngredientes[origenId].rotationOffset);
+                }
+                else
+                {
+                    GameObject ingredienteDestino = mapaIngredientes[destinoId].instancia;
+                    if (ingredienteDestino != null && ingredienteDestino.activeInHierarchy)
+                    {
+                        ingredienteOrigen.SetActive(true);
+                        ingredienteOrigen.transform.SetParent(ingredienteDestino.transform);
+                        ingredienteOrigen.transform.localPosition = mapaIngredientes[origenId].positionOffset;
+                        ingredienteOrigen.transform.localRotation = Quaternion.Euler(mapaIngredientes[origenId].rotationOffset);
+                    }
+                }
             }
         }
     }
@@ -337,16 +337,20 @@ public class ControladorAR : MonoBehaviour
     public VuforiaTorrijaDetector FindTargetDetector(string id)
     {
         VuforiaTorrijaDetector[] detectors = FindObjectsOfType<VuforiaTorrijaDetector>();
-        foreach (var d in detectors)
+        int i = 0;
+        bool found = false;
+        VuforiaTorrijaDetector result = null;
+        while (i < detectors.Length && !found) 
         {
-            if (d.id == id) return d;
+            var detector = detectors[i];
+            if (detector.id == id)
+            {
+                found = true;
+                result = detector;
+            }
+            i++;
         }
-        return null;
-    }
-
-    public RecipeStep GetCurrentStep()
-    {
-        return currentStep;
+        return result;
     }
 
     public Transform GetDetectorTransform(string id)
@@ -355,72 +359,11 @@ public class ControladorAR : MonoBehaviour
         return td != null ? td.transform : null;
     }
 
-    public void SetModelVisibility(string id, bool visible)
+    public void SetVisibilidadIngrediente(string id, bool visible)
     {
-        if (mapa.ContainsKey(id) && mapa[id].instancia != null)
+        if (mapaIngredientes.ContainsKey(id) && mapaIngredientes[id].instancia != null)
         {
-            mapa[id].instancia.SetActive(visible);
+            mapaIngredientes[id].instancia.SetActive(visible);
         }
-    }
-}
-
-public class LabelBillboard : MonoBehaviour
-{
-    public GameObject targetModel;
-    public float verticalOffset = 1.0f;
-    public float cameraBias = 0.1f;
-    private Vector3 initialLocalScale;
-
-    void Start()
-    {
-        initialLocalScale = transform.localScale;
-    }
-
-    void LateUpdate()
-    {
-        if (targetModel == null || !targetModel.activeInHierarchy) return;
-
-        if (transform.parent != null)
-        {
-            Vector3 parentScale = transform.parent.lossyScale;
-            transform.localScale = new Vector3(
-                initialLocalScale.x / (parentScale.x != 0 ? parentScale.x : 1f),
-                initialLocalScale.y / (parentScale.y != 0 ? parentScale.y : 1f),
-                initialLocalScale.z / (parentScale.z != 0 ? parentScale.z : 1f)
-            );
-        }
-
-        Renderer[] renderers = targetModel.GetComponentsInChildren<Renderer>();
-        if (renderers.Length == 0) return;
-
-        Bounds bounds = new Bounds();
-        bool first = true;
-        foreach (var r in renderers)
-        {
-            if (!r.enabled || r.gameObject == gameObject) continue;
-            
-            if (first)
-            {
-                bounds = r.bounds;
-                first = false;
-            }
-            else
-            {
-                bounds.Encapsulate(r.bounds);
-            }
-        }
-
-        if (first) return;
-
-        Vector3 camPos = Camera.main.transform.position;
-        
-        // Use the center of the bounds for a stable position
-        Vector3 targetPos = new Vector3(bounds.center.x, bounds.max.y + verticalOffset, bounds.center.z);
-
-        Vector3 dirToCam = (camPos - targetPos).normalized;
-        targetPos += dirToCam * cameraBias;
-
-        transform.position = targetPos;
-        transform.rotation = Quaternion.LookRotation(transform.position - camPos);
     }
 }

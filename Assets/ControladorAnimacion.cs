@@ -37,7 +37,7 @@ public class ControladorAnimacion : MonoBehaviour
         {
             if (!animacionActivaAnteriormente)
             {
-                IniciarSesionAnimacion();
+                IniciarAnimacion();
             }
             EjecutarAnimacion();
             animacionActivaAnteriormente = true;
@@ -52,20 +52,20 @@ public class ControladorAnimacion : MonoBehaviour
         }
     }
 
-    private void IniciarSesionAnimacion()
+    private void IniciarAnimacion()
     {
         if (panAnimado != null)
         {
             indiceActual = 0;
             panAnimado.SetActive(true);
 
-            controladorAR.SetModelVisibility("panDulce", false);
+            controladorAR.SetVisibilidadIngrediente("panDulce", false);
 
-            Transform firstTarget = controladorAR.GetDetectorTransform(secuenciaIDs[0]);
-            if (firstTarget != null)
+            Transform primerElemento = controladorAR.GetDetectorTransform(secuenciaIDs[0]);
+            if (primerElemento != null)
             {
-                panAnimado.transform.position = firstTarget.position + firstTarget.TransformDirection(offsetPosicion);
-                panAnimado.transform.rotation = firstTarget.rotation * Quaternion.Euler(offsetRotacion);
+                panAnimado.transform.position = primerElemento.position + primerElemento.TransformDirection(offsetPosicion);
+                panAnimado.transform.rotation = primerElemento.rotation * Quaternion.Euler(offsetRotacion);
             }
         }
     }
@@ -79,23 +79,23 @@ public class ControladorAnimacion : MonoBehaviour
 
             if (targetTransform != null)
             {
-                Vector3 worldOffset = targetTransform.TransformDirection(offsetPosicion);
-                Vector3 targetPos = targetTransform.position + worldOffset;
-                Quaternion targetRot = targetTransform.rotation * Quaternion.Euler(offsetRotacion);
+                Vector3 desplazamientoGlobal = targetTransform.TransformDirection(offsetPosicion);
+                Vector3 targetPosicion = targetTransform.position + desplazamientoGlobal;
+                Quaternion targetRotacion = targetTransform.rotation * Quaternion.Euler(offsetRotacion);
 
                 panAnimado.transform.position = Vector3.MoveTowards(
                     panAnimado.transform.position,
-                    targetPos,
+                    targetPosicion,
                     velocidad * Time.deltaTime
                 );
 
                 panAnimado.transform.rotation = Quaternion.Slerp(
                     panAnimado.transform.rotation,
-                    targetRot,
+                    targetRotacion,
                     velocidad * Time.deltaTime
                 );
 
-                if (Vector3.Distance(panAnimado.transform.position, targetPos) < distanciaUmbral)
+                if (Vector3.Distance(panAnimado.transform.position, targetPosicion) < distanciaUmbral)
                 {
                     indiceActual = (indiceActual + 1) % secuenciaIDs.Length;
                 }
@@ -113,7 +113,7 @@ public class ControladorAnimacion : MonoBehaviour
         {
             panAnimado.SetActive(false);
             indiceActual = 0;
-            if (controladorUI.IsRecetaCompleta()) controladorAR.SetModelVisibility("panDulce", true);
+            if (controladorUI.IsRecetaCompleta()) controladorAR.SetVisibilidadIngrediente("panDulce", true);
         }
     }
 }
