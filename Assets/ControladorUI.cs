@@ -6,15 +6,25 @@ using System.Linq;
 
 public class ControladorUI : MonoBehaviour
 {
-    [Header("Referencias")]
     public ControladorAR controladorAR;
     public TextMeshProUGUI textoEstado;
 
-    [Header("Configuración de Elementos")]
     public List<string> ingredientesIDs = new List<string> { "panSeco", "leche", "canela", "aceite", "azucar", "bolHuevo" };
     public List<string> utensiliosIDs = new List<string> { "bandeja", "sarten", "plato" };
 
     private bool mostrarInfo = false;
+
+    public static ControladorUI instancia { get; private set; }
+
+    private void Awake()
+    {
+        if (instancia != null && instancia != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        instancia = this;
+    }
 
     void Update()
     {
@@ -74,11 +84,17 @@ public class ControladorUI : MonoBehaviour
         {
             mostrarInfo = !mostrarInfo;
             controladorAR.ToggleLabels(mostrarInfo);
+            controladorAR.ActualizarLabels();
         }
     }
 
     public bool IsRecetaCompleta()
     {
         return textoEstado.text.Equals("Receta completa");
+    }
+
+    public bool IsInfoActive()
+    {
+        return mostrarInfo;
     }
 }

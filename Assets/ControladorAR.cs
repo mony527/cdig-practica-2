@@ -11,6 +11,7 @@ public class ControladorAR : MonoBehaviour
     public class TargetData
     {
         public string id;              
+        public string label;
         public GameObject prefab;      
         public Vector3 positionOffset; 
         public Vector3 rotationOffset; 
@@ -19,7 +20,9 @@ public class ControladorAR : MonoBehaviour
     }
 
     public List<TargetData> targets = new List<TargetData>();
+
     public GameObject txtIngrediente;
+    public GameObject txtPanes;
 
     public enum RecipeStep
     {
@@ -51,7 +54,7 @@ public class ControladorAR : MonoBehaviour
                 t.instancia.name = t.id + "_Model";
                 t.instancia.SetActive(false);
                 
-                AddLabelToModel(t.instancia, t.id);
+                AddLabelToModel(t.instancia, t.label);
             }
         }
     }
@@ -61,28 +64,39 @@ public class ControladorAR : MonoBehaviour
         if (model == null) return;
 
         GameObject labelObj = null;
+        GameObject labelObjOpt = null;
         TextMeshPro textMesh = null;
+        TextMeshPro textMeshOpt = null;
 
         if (txtIngrediente != null)
         {
-            labelObj = Instantiate(txtIngrediente, model.transform);
+            if (name.StartsWith("Pan"))
+            {
+                if (name.Equals("Pan dulce"))
+                {
+                    labelObjOpt = Instantiate(txtPanes, model.transform);
+                    labelObjOpt.name = "InfoLabelOpt";
+                    textMeshOpt = labelObjOpt.GetComponentInChildren<TextMeshPro>();
+                }
+                labelObj = Instantiate(txtPanes, model.transform);
+            }
+            else
+            {
+                labelObj = Instantiate(txtIngrediente, model.transform);
+            }
+
             labelObj.name = "InfoLabel";
             textMesh = labelObj.GetComponentInChildren<TextMeshPro>();
-        }
-        else
-        {
-            // Fallback manual creation if prefab is missing
-            labelObj = new GameObject("InfoLabel");
-            labelObj.transform.SetParent(model.transform);
-            textMesh = labelObj.AddComponent<TextMeshPro>();
-            textMesh.fontSize = 12;
-            textMesh.alignment = TextAlignmentOptions.Center;
-            textMesh.color = Color.white;
         }
 
         if (textMesh != null)
         {
             textMesh.text = name;
+        }
+
+        if (name.Equals("Pan dulce") && textMeshOpt != null)
+        {
+            textMeshOpt.text = "Torrija";
         }
 
         if (labelObj != null)
@@ -92,6 +106,14 @@ public class ControladorAR : MonoBehaviour
             billboard.targetModel = model;
             labelObj.SetActive(false);
         }
+
+        if (name.Equals("Pan dulce") && labelObjOpt != null)
+        {
+            var billboard = labelObjOpt.GetComponent<LabelBillboard>();
+            if (billboard == null) billboard = labelObjOpt.AddComponent<LabelBillboard>();
+            billboard.targetModel = model;
+            labelObjOpt.SetActive(false);
+        }
     }
 
     public void ToggleLabels(bool visible)
@@ -100,8 +122,15 @@ public class ControladorAR : MonoBehaviour
         {
             if (t.instancia != null)
             {
-                Transform label = t.instancia.transform.Find("InfoLabel");
-                if (label != null) label.gameObject.SetActive(visible);
+                if (t.id.Equals("Pan dulce") && currentStep == RecipeStep.Torrija)
+                {
+                    Transform labelOpt = t.instancia.transform.Find("InfoLabelOpt");
+                    if (labelOpt != null) labelOpt.gameObject.SetActive(visible);
+                }
+                else { 
+                    Transform label = t.instancia.transform.Find("InfoLabel");
+                    if (label != null) label.gameObject.SetActive(visible);
+                }
             }
         }
     }
@@ -183,9 +212,29 @@ public class ControladorAR : MonoBehaviour
         {
             if (IsPresent("plato"))
                 currentStep = RecipeStep.Torrija;
+            ActualizarLabels();
         }
 
         ActualizarVisuales();
+    }
+
+    public void ActualizarLabels()
+    {
+        TargetData panDulce = mapa["panDulce"];
+        Transform labelOpt = panDulce.instancia.transform.Find("InfoLabelOpt");
+        Transform label = panDulce.instancia.transform.Find("InfoLabel");
+
+        if (currentStep == RecipeStep.Torrija)
+        {
+            if (label != null) label.gameObject.SetActive(false);
+            if (labelOpt != null) labelOpt.gameObject.SetActive(ControladorUI.instancia.IsInfoActive());
+        }
+
+        if (currentStep == RecipeStep.PanDulce)
+        {
+            if (labelOpt != null) labelOpt.gameObject.SetActive(false);
+            if (label != null) label.gameObject.SetActive(ControladorUI.instancia.IsInfoActive());
+        }
     }
 
     private bool IsPresent(string id)
@@ -318,7 +367,7 @@ public class ControladorAR : MonoBehaviour
 public class LabelBillboard : MonoBehaviour
 {
     public GameObject targetModel;
-    public float verticalOffset = 0.2f;
+    public float verticalOffset = 1.0f;
     public float cameraBias = 0.1f;
     private Vector3 initialLocalScale;
 

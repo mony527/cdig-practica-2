@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class ControladorAnimacion : MonoBehaviour
 {
-    [Header("Referencias")]
     public ControladorAR controladorAR;
     public ControladorUI controladorUI;
     public GameObject prefabPan;
 
-    [Header("Configuración Animación")]
-    public float velocidad = 2.0f;
-    public float distanciaUmbral = 0.1f;
-    public Vector3 offsetPosicion = new Vector3(0, 1.0f, 0);
-    public Vector3 offsetRotacion = new Vector3(90, 0, 0);
+    private float velocidad = 5.0f;
+    private float distanciaUmbral = 0.1f;
+    private Vector3 offsetPosicion = new Vector3(0, 2.0f, 0);
+    private Vector3 offsetRotacion = new Vector3(0, 90, 0);
 
     private GameObject panAnimado;
     private int indiceActual = 0;
@@ -85,21 +83,18 @@ public class ControladorAnimacion : MonoBehaviour
                 Vector3 targetPos = targetTransform.position + worldOffset;
                 Quaternion targetRot = targetTransform.rotation * Quaternion.Euler(offsetRotacion);
 
-                // Mover hacia el objetivo
                 panAnimado.transform.position = Vector3.MoveTowards(
                     panAnimado.transform.position,
                     targetPos,
                     velocidad * Time.deltaTime
                 );
 
-                // Rotar hacia la orientación tumbada del objetivo
                 panAnimado.transform.rotation = Quaternion.Slerp(
                     panAnimado.transform.rotation,
                     targetRot,
                     velocidad * Time.deltaTime
                 );
 
-                // Si llegamos al punto, pasar al siguiente
                 if (Vector3.Distance(panAnimado.transform.position, targetPos) < distanciaUmbral)
                 {
                     indiceActual = (indiceActual + 1) % secuenciaIDs.Length;
@@ -107,7 +102,6 @@ public class ControladorAnimacion : MonoBehaviour
             }
             else
             {
-                // Si el tracker no está visible, intentamos saltar para no bloquear el bucle
                 indiceActual = (indiceActual + 1) % secuenciaIDs.Length;
             }
         }
@@ -119,7 +113,7 @@ public class ControladorAnimacion : MonoBehaviour
         {
             panAnimado.SetActive(false);
             indiceActual = 0;
-            controladorAR.SetModelVisibility("panDulce", true);
+            if (controladorUI.IsRecetaCompleta()) controladorAR.SetModelVisibility("panDulce", true);
         }
     }
 }
